@@ -1,0 +1,177 @@
+<?php
+$objectmanager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectmanager->get('\Magento\Store\Model\StoreManagerInterface');
+$mediaURL = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$mainurl = $mediaURL . 'Jawhara/Story/';
+
+// get Collections
+$collection = $block->getCollection();
+?>
+
+<?php if ($collection->count()) : ?>
+    <div class="video-slider container-fluid">
+        <?php
+        foreach ($collection as $item) :
+
+            // For Full width video
+            if ($item->getType() == '0') {
+            ?>
+                <div class="video-slider-inner">
+                    <div class="video-wrapper" data-title="<?= $item->getTitle() ?>">
+                        <?php if ($item->getVideotype() == '0') {
+                        ?>
+                            <video playsinline autoplay loop muted controls>
+                                <source src="<?= $mediaURL . $item->getFileupload(); ?>" type="video/mp4">
+                            </video>
+                        <?php
+                        } else if ($item->getVideotype() == '1') {
+                            $helper = $this->helper('Jawhara\Story\Helper\Data');
+                            $values = $helper->getYoutubeId($item->getVideolink());
+                        ?>
+                            <div class="iframe-wrapper">
+                                <iframe title="YouTube video player" class="youtube-player" type="text/html" src="https://www.youtube.com/embed/<?= $values ?>?autoplay=1&amp;controls=0&amp;mute=1&amp;showinfo=0" frameborder="0" allowFullScreen></iframe>
+                            </div>
+                            <div class="overlay"></div>
+                        <?php
+                        }
+                        ?>
+                        <div class="inner-text animated fadeInUp">
+                            <h2 class="custom-title"><?= $item->getTitle(); ?></h2>
+                            <p>
+                                <?= $item->getDescription(); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+
+            // For Left Image & Right Content
+            if ($item->getType() == '2') {
+            ?>
+                <div class="video-slider-inner" data-title="<?= $item->getTitle(); ?>">
+                    <div class="inner-desc odd-desc d-flex flex-wrap">
+                        <img src="<?= $mediaURL . $item->getFileupload(); ?>" alt="img" class="img-fluid left-img">
+                        <div class="inner-width">
+                            <div class="inner-text right-desc  animated fadeInUp">
+                                <div>
+                                    <h2><?= $item->getTitle(); ?></h2>
+                                    <p>
+                                        <?= $item->getDescription(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+
+            // For Right Image & Left Content
+            if ($item->getType() == '1') {
+            ?>
+                <div class="video-slider-inner" data-title="<?= $item->getTitle(); ?>">
+                    <div class="video-wrapper inner-desc">
+                        <img src="<?= $mediaURL . $item->getFileupload(); ?>" alt="diamond-img" class="video-banner-img img-fluid">
+                        <div class="overlay"></div>
+                        <div class="inner-text  animated fadeInUp">
+                            <h2 class="custom-title"><?= $item->getTitle(); ?></h2>
+                            <p>
+                                <?= $item->getDescription(); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+
+            // For Full width Image
+            if ($item->getType() == '3') {
+            ?>
+                <div class="video-slider-inner" data-title="<?= $item->getTitle(); ?>">
+                    <div class="inner-desc even-desc d-flex flex-wrap">
+                        <div class="inner-width">
+                            <div class="inner-text left-desc  animated fadeInUp">
+                                <div>
+                                    <h2><?= $item->getTitle(); ?></h2>
+                                    <p>
+                                        <?= $item->getDescription(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <img src="<?= $mediaURL . $item->getFileupload(); ?>" alt="img" class="img-fluid right-img">
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        <?php endforeach; ?>
+    </div>
+
+<?php else : ?>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('No Jawhara Story found')) ?></span></div>
+<?php endif; ?>
+
+<script>
+    require(['jquery', 'jquery/ui', 'slick'], function($) {
+
+        $(document).ready(function() {
+            $(window).on('load', function() {
+                $(".preload").hide();
+            });
+
+            $(".column.main").hide();
+            $(".custom-title").css("color", "white");
+            const $slider = $(".video-slider");
+            $slider
+                .on('init', () => {
+                    mouseWheel($slider)
+                })
+                .slick({
+                    arrows: false,
+                    dots: true,
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    vertical: true,
+                    verticalSwiping: true,
+                    loop: true,
+                    // cssEase: 'all',
+                    speed: 1000,
+                    customPaging: function(slider, i) {
+                        var title = $(slider.$slides[i].innerHTML).find('div[data-title]').data('title');
+                        return '<a class="pager__item">' + title + ' </a>';
+                    },
+
+                })
+
+            function mouseWheel($slider) {
+                $(window).on('wheel', {
+                    $slider: $slider
+                }, mouseWheelHandler)
+            }
+
+            function mouseWheelHandler(event) {
+                // event.preventDefault()
+                const $slider = event.data.$slider
+                const delta = event.originalEvent.deltaY
+                if (delta > 0) {
+                    $slider.slick('slickNext')
+                } else {
+                    $slider.slick('slickPrev')
+                }
+            }
+
+            $(".video-slider").on("beforeChange", function() {
+                $('.video-slider-inner .inner-text').removeClass('animated fadeInUp').hide();
+                setTimeout(() => {
+                    $('.video-slider-inner .inner-text').addClass('animated fadeInUp').show();
+                }, 600);
+            })
+
+        });
+
+    });
+</script>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="custom-about-layout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+  <head>
+    <css src="Jawhara_Story::css/video-slider.css"/>
+    <css src="Jawhara_Story::css/fontawesome4.2.0.css"/>
+    <!-- <css src="Jawhara_Story::css/bootstrap.min.css"/> -->
+
+    <css src="Jawhara_Story::css/slick.css"/>
+    <css src="Jawhara_Story::css/slick-theme.css"/>
+    <css src="Jawhara_Story::css/animate.css"/>
+
+    <!-- <link src="Jawhara_Story::js/bootstrap.min.js"/> -->
+    <link src="Jawhara_Story::js/wow.min.js"/>
+    <link src="Jawhara_Story::js/slick.js"/>
+  </head>
+</page>

@@ -1,0 +1,23 @@
+{
+    "jawhara_story": {
+        "column": {
+            "entity_id": true,
+            "title": true,
+            "description": true,
+            "type": true,
+            "fileupload": true,
+            "created_at": true,
+            "updated_at": true,
+            "status": true,
+            "videotype": true,
+            "position": true,
+            "videolink": true
+        },
+        "index": {
+            "JAWHARA_STORY_TITLE_DESCRIPTION": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

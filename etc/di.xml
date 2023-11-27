@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Jawhara\Story\Api\Data\ExtensionInterface" type="Jawhara\Story\Model\Extension" />
+    
+    <virtualType name="Jawhara\Story\Model\ResourceModel\Extension\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">jawhara_story</argument>
+            <argument name="resourceModel" xsi:type="string">Jawhara\Story\Model\ResourceModel\Extension</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="jawhara_story_list_data_source" xsi:type="string">Jawhara\Story\Model\ResourceModel\Extension\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

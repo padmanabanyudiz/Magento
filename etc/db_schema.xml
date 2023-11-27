@@ -1,0 +1,22 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="jawhara_story">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" comment="ID" identity="true"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="description" nullable="false" length="500" comment="Description"/>
+        <column xsi:type="smallint" name="type" nullable="false" comment="Type of Content" default="1" />
+        <column xsi:type="varchar" name="fileupload" nullable="false" length="500" comment="Uploade File"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <column xsi:type="smallint" name="status" nullable="false" comment="Active Status" default="1" />
+        <column xsi:type="smallint" name="videotype" nullable="false" comment="Type Of Video(link/upload)" default="1" />
+        <column xsi:type="smallint" name="position" nullable="false" comment="Sort Order" />
+        <column xsi:type="varchar" name="videolink" nullable="false" comment="Video Link" length="500" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="INDEX_JAWHARA_STORY" indexType="fulltext">
+            <column name="title"/>
+            <column name="description"/>
+    	</index>
+    </table>
+</schema>

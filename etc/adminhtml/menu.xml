@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Jawhara_Story::story" title="Jawhara Story (Our Story Page)" translate="title" module="Jawhara_Story" sortOrder="0" dependsOnModule="Jawhara_Story" resource="Jawhara_Story::story" parent="Jawhara_Csp::extensions"/> 
+        <!-- <add id="Jawhara_Story::manager" title="Story" module="Jawhara_Story" sortOrder="10" resource="Jawhara_Story::manager" /> -->
+        <add id="Jawhara_Story::add_row" title="Manage Story" module="Jawhara_Story" sortOrder="30" parent="Jawhara_Story::story" action="story/grid" resource="Jawhara_Story::add_row"/>
+    </menu>
+
+    <!-- <menu>
+        <add id="Jawhara_Story::manager" title="Story" module="Jawhara_Story" sortOrder="99" resource="Jawhara_Story::manager" />
+        <add id="Jawhara_Story::add_row" title="Story Manage" module="Jawhara_Story" sortOrder="30" parent="Jawhara_Story::manager" action="story/grid" resource="Jawhara_Story::add_row"/>
+    </menu> -->
+</config>

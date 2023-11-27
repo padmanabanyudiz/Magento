@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page layout="custom-about-layout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <head>
+            <!-- <script src="https://js.stripe.com/v3/" src_type="url"/> -->
+            <css src="Jawhara_Story::video-slider.css" src_type="url"/>
+        </head>
+        <referenceContainer name="content">
+            <block class="Jawhara\Story\Block\Showdata" name="showdata" template="Jawhara_Story::index.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
